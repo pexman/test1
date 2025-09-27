@@ -1,0 +1,111 @@
+{
+  "config": {
+    "site_name": "Liebesblick Fotografie",
+    "base_url": "http://localhost",
+    "default_locale": "de-DE",
+    "openai": {
+      "api_key": "",
+      "model": "gpt-4o-mini",
+      "temperature": 0.7,
+      "prompt_template": "Erstelle überzeugende Texte für eine Landing Page zur Kategorie {category} im Ton {tone} für die Zielgruppe {audience}. Nutze folgende Stichworte: {keywords}."
+    },
+    "seo": {
+      "title": "Emotionale Fotoshootings in Deutschland",
+      "description": "Professionelle Familien- und Babyfotografie mit Herz.",
+      "keywords": "Fotostudio, Familienfotos, Babyfotos"
+    },
+    "legal": {
+      "impressum": "<h2>Impressum</h2><p>Liebesblick Fotografie<br>Inhaber: Delina Hartmann<br>Musterstraße 1<br>12345 Berlin</p>",
+      "privacy": "<h2>Datenschutzerklärung</h2><p>Wir verarbeiten personenbezogene Daten gemäß DSGVO.</p>",
+      "policy_version": "2024-01"
+    },
+    "admin_user": {
+      "email": "admin@example.com",
+      "password_hash": "$2y$10$xtY60p.PLMGIXevqxetUIeRbIY6uICNC/MAOhrGPWCR0/vmSI9A4O"
+    }
+  },
+  "pages": [
+    {
+      "id": "home",
+      "type": "home",
+      "slug": "",
+      "title": "Liebevolle Fotografie für jede Lebensphase",
+      "subtitle": "Zeitlose Erinnerungen voller Wärme.",
+      "hero_image": "assets/images/hero-home.jpg",
+      "gallery": [
+        "assets/images/sample1.jpg",
+        "assets/images/sample2.jpg",
+        "assets/images/sample3.jpg"
+      ],
+      "benefits": [
+        {"title": "Natürliche Emotionen", "description": "Wir fangen echte Gefühle mit viel Feingefühl ein."},
+        {"title": "Flexible Pakete", "description": "Individuell zugeschnittene Shootings für jede Familie."},
+        {"title": "Schnelle Bearbeitung", "description": "Fertige Galerien innerhalb von 5 Werktagen."}
+      ],
+      "faq": [
+        {"q": "Wo finden die Shootings statt?", "a": "In unserem Studio oder an Lieblingsorten in Berlin."},
+        {"q": "Was sollen wir anziehen?", "a": "Harmonische Farben ohne große Muster sind ideal."}
+      ],
+      "status": "published",
+      "meta": {
+        "title": "Liebesblick Fotografie | Emotionale Bilder",
+        "description": "Babybauch-, Newborn- und Familienshootings, die berühren.",
+        "canonical": "/"
+      }
+    },
+    {
+      "id": "portfolio",
+      "type": "portfolio",
+      "slug": "portfolio",
+      "title": "Portfolio",
+      "subtitle": "Einblicke in unsere Shootings",
+      "hero_image": "assets/images/portfolio-hero.jpg",
+      "gallery": [
+        "assets/images/portfolio1.jpg",
+        "assets/images/portfolio2.jpg",
+        "assets/images/portfolio3.jpg"
+      ],
+      "status": "published",
+      "meta": {
+        "title": "Portfolio | Liebesblick Fotografie",
+        "description": "Lerne unsere beliebtesten Foto-Collections kennen.",
+        "canonical": "/portfolio"
+      }
+    },
+    {
+      "id": "weihnachten-mini",
+      "type": "landing",
+      "slug": "weihnachtsminis-2024",
+      "title": "WEIHNACHTSMINIS 2024",
+      "subtitle": "Tageslichstudio in Kleinmachnow",
+      "hero_image": "assets/images/landing-hero.jpg",
+      "gallery": [
+        "assets/images/landing1.jpg",
+        "assets/images/landing2.jpg",
+        "assets/images/landing3.jpg"
+      ],
+      "benefits": [
+        {"title": "Stimmungsvolle Kulisse", "description": "Warme Naturtöne, goldene Akzente und gemütliche Sets."},
+        {"title": "15 Minuten Shooting", "description": "Perfekt für Familien mit kleinen Kindern."},
+        {"title": "15 professionell bearbeitete Fotos", "description": "Lieferung innerhalb von 3 Werktagen."}
+      ],
+      "faq": [
+        {"q": "Wie viele Personen können teilnehmen?", "a": "Bis zu 5 Personen pro Termin."},
+        {"q": "Gibt es Parkplätze?", "a": "Kostenlose Parkplätze direkt vor dem Studio."}
+      ],
+      "pricing": [
+        {"name": "Mini Paket", "price": "149€", "description": "15 Minuten Shooting, 5 Bilder"},
+        {"name": "Classic Paket", "price": "219€", "description": "25 Minuten Shooting, 15 Bilder"}
+      ],
+      "status": "published",
+      "meta": {
+        "title": "Weihnachtsminis 2024 | Liebesblick Fotografie",
+        "description": "Magische Weihnachtsfotoshootings in gemütlicher Atmosphäre.",
+        "canonical": "/l/weihnachtsminis-2024"
+      }
+    }
+  ],
+  "media": [],
+  "consents": [],
+  "requests": []
+}

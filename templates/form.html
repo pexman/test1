@@ -1,0 +1,55 @@
+<section class="lf-shell">
+  <header class="lf-header">
+    <img src="assets/images/logo.svg" alt="Liebesblick" class="lf-logo">
+    <h1 class="lf-title">Kontakt aufnehmen</h1>
+    <p class="lf-subtitle">Sichere dir deine Session – wir melden uns innerhalb von 24 Stunden.</p>
+  </header>
+  <form class="lf-form" method="post" action="{{form_action}}">
+    <div class="lf-field-row">
+      <label class="lf-label">Wie heißt du?</label>
+      <input class="lf-input" name="name" type="text" maxlength="80" required>
+    </div>
+    <div class="lf-field-row">
+      <label class="lf-label">Deine Wunsch-E-Mail?</label>
+      <input class="lf-input" name="email" type="email" maxlength="120" required>
+    </div>
+    <div class="lf-field-row">
+      <label class="lf-label">Für welches Shooting interessierst du dich?</label>
+      <select class="lf-input" name="category">
+        {{category_options}}
+      </select>
+    </div>
+    <div class="lf-field-row">
+      <label class="lf-label">Wie hast du von uns erfahren?</label>
+      <input class="lf-input" name="source" type="text" maxlength="100">
+    </div>
+    <div class="lf-field-row">
+      <label class="lf-label">Wer darf dabei sein?</label>
+      <textarea class="lf-textarea" name="details" rows="3" maxlength="300"></textarea>
+    </div>
+    <div class="lf-field-row">
+      <label class="lf-label">Wähle deinen Termin</label>
+      <input class="lf-input" name="date" type="date">
+    </div>
+    <div class="lf-field-row lf-checkboxes">
+      <label class="lf-label">Welche Optionen interessieren dich?</label>
+      <div class="lf-checkbox-grid">
+        {{option_checks}}
+      </div>
+    </div>
+    <div class="lf-field-row">
+      <label class="lf-label">Nachricht</label>
+      <textarea class="lf-textarea" name="message" rows="4" maxlength="500"></textarea>
+    </div>
+    <div class="lf-consent">
+      <label class="lf-consent-label">
+        <input type="checkbox" name="privacy" required>
+        <span>Ich stimme der Verarbeitung meiner Daten gemäß der <a href="/datenschutz">Datenschutzerklärung</a> zu.</span>
+      </label>
+    </div>
+    <button class="lf-submit" type="submit">Nachricht senden</button>
+  </form>
+  <footer class="lf-footer">
+    <p>© {{year}} Liebesblick Fotografie | Natürlich Delina Hartmann</p>
+  </footer>
+</section>
