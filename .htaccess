@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/assets/
+RewriteCond %{REQUEST_URI} !^/api.php$
+RewriteCond %{REQUEST_URI} !^/admin.php$
+RewriteCond %{REQUEST_URI} !^/data/
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+<FilesMatch "data.json$">
+  Require all denied
+</FilesMatch>
