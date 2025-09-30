@@ -1,0 +1,52 @@
+{
+  "general": {
+    "hero_title": "Zeitlose Fotografie für besondere Momente",
+    "hero_subtitle": "Wir halten Ihre schönsten Emotionen in stilvollen Bildern fest.",
+    "about_text": "<p>Herzlich willkommen im Studio Lumière. Wir sind spezialisiert auf natürliche, elegante und emotionale Fotografie.</p>",
+    "quote_text": "Jeder Moment verdient es, bewahrt zu werden.",
+    "info_text": "Unsere Shootings sind individuell auf Sie abgestimmt. Schreiben Sie uns für ein persönliches Angebot.",
+    "pricing_text": "Pakete ab 249€ inklusive Beratung, Styling Guide und persönlicher Online-Galerie."
+  },
+  "seo": {
+    "meta_title": "Studio Lumière – Professionelle Fotografie in Berlin",
+    "meta_description": "Fotostudio in Berlin für Paarshootings, Babybauch, Familien und Newborn. Jetzt Termin sichern.",
+    "meta_keywords": "Fotostudio Berlin, Paarshooting, Familienfotograf, Babybauch",
+    "og_title": "Studio Lumière – Emotionale Fotografie",
+    "og_description": "Zeitlose Fotografie für Familien, Paare und Neugeborene.",
+    "og_image": "uploads/hero.jpg"
+  },
+  "images": {
+    "logo": "uploads/logo.png",
+    "hero_background": "uploads/hero.jpg",
+    "quote_background": "uploads/quote.jpg",
+    "info_background": "uploads/info.jpg",
+    "pricing_background": "uploads/pricing.jpg",
+    "family_background": "uploads/family.jpg"
+  },
+  "navigation": [
+    {"label": "Home", "url": "#home"},
+    {"label": "Portfolio", "url": "#portfolio"},
+    {"label": "Preise", "url": "#pricing"},
+    {"label": "Kontakt", "url": "#contact"}
+  ],
+  "buttons": [
+    {"label": "Jetzt anfragen", "url": "booking/index.php"},
+    {"label": "Galerie entdecken", "url": "#gallery"}
+  ],
+  "visual": {
+    "hero_height": "85vh",
+    "quote_height": "60vh",
+    "text_color": "#3b3128",
+    "accent_color": "#7A6F64"
+  },
+  "galleries": {
+    "portfolio": [
+      {"src": "uploads/gallery1.jpg", "description": "Liebesgeschichte in den Straßen Berlins", "visible": true},
+      {"src": "uploads/gallery2.jpg", "description": "Babybauchshooting im Studio", "visible": true}
+    ],
+    "family": [
+      {"src": "uploads/gallery3.jpg", "description": "Familienglück am See", "visible": true},
+      {"src": "uploads/gallery4.jpg", "description": "Neugeborenen Zauber", "visible": true}
+    ]
+  }
+}
