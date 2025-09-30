@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Datenschutzerklärung · Studio Lumière</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {--color-dark:#7A6F64;--color-medium:#B8A99A;--color-light:#D8CEC3;--color-lighter:#EEEDED;}
+        * {box-sizing:border-box;}
+        body {margin:0;font-family:'Montserrat',sans-serif;background:#f7f3f0;color:#3b3128;}
+        header {padding:3rem 6vw;background:linear-gradient(135deg,#7A6F64,#B8A99A);color:#fff;text-align:center;}
+        main {padding:4rem 6vw;max-width:1100px;margin:0 auto;display:grid;gap:2rem;}
+        section {background:#fff;padding:2rem 2.5rem;border-radius:20px;box-shadow:0 20px 60px rgba(122,111,100,.12);}
+        h1 {margin:0;font-size:2.4rem;}
+        h2 {color:#7A6F64;margin-top:0;font-size:1.4rem;}
+        a {color:#7A6F64;}
+        ul {padding-left:1.2rem;}
+        footer {text-align:center;padding:2rem 6vw;color:#7A6F64;font-size:.95rem;}
+    </style>
+</head>
+<body>
+<header>
+    <h1>Datenschutzerklärung</h1>
+    <p>Studio Lumière · Verantwortlich: Marie Schneider, Karl-Marx-Allee 12, 10243 Berlin</p>
+</header>
+<main>
+    <section>
+        <h2>1. Verarbeitung personenbezogener Daten</h2>
+        <p>Wir verarbeiten personenbezogene Daten (Name, Kontaktdaten, Buchungsinformationen) ausschließlich zum Zweck der Angebotserstellung, Terminplanung und Vertragserfüllung. Die Verarbeitung erfolgt gemäß Art. 6 Abs. 1 lit. b DSGVO.</p>
+    </section>
+    <section>
+        <h2>2. Online-Buchungssystem</h2>
+        <p>Alle Reservierungen werden ohne externe Datenbanken als JSON-Dateien auf unserem Server gespeichert. Für jede Buchung wird eine individuelle Referenznummer erzeugt. Die Übertragung erfolgt verschlüsselt. Verfügbarkeiten und Buchungsdetails werden ausschließlich durch autorisierte Personen verarbeitet.</p>
+        <p>Die im Formular enthaltenen Pflichtfelder sind notwendig für die Durchführung des Vertrages. Ohne diese Angaben kann keine Buchung erfolgen.</p>
+    </section>
+    <section>
+        <h2>3. QR-Codes und Verifikation</h2>
+        <p>Nach Erstellung einer Buchung wird ein eindeutiger Token generiert. Dieser Token wird als QR-Code dargestellt (bereitgestellt durch api.qrserver.com). Der QR-Code dient zur Prüfung Ihrer Reservierung im Studio und wird mit Ihrer Buchung verknüpft. Die Verifikation protokolliert Datum, Uhrzeit, IP-Adresse sowie den Status der Prüfung.</p>
+    </section>
+    <section>
+        <h2>4. Einwilligungen & Datenschutzrechte</h2>
+        <p>Im Rahmen der Buchung können Sie optional in Marketing-Kommunikation einwilligen. Diese Einwilligung kann jederzeit per E-Mail an <a href="mailto:hallo@studio-lumiere.de">hallo@studio-lumiere.de</a> widerrufen werden. Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie Datenübertragbarkeit gemäß Art. 15–20 DSGVO.</p>
+    </section>
+    <section>
+        <h2>5. Cookies & Tracking</h2>
+        <p>Unsere Website verwendet ausschließlich technisch notwendige Cookies für Sitzungsverwaltung im Admin-Bereich. Es findet kein externes Tracking statt.</p>
+    </section>
+    <section>
+        <h2>6. Auftragsverarbeitung & Hosting</h2>
+        <p>Der Betrieb erfolgt auf Servern innerhalb der Europäischen Union. Mit dem Hosting-Anbieter besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO. Backups werden verschlüsselt gespeichert.</p>
+    </section>
+    <section>
+        <h2>7. Speicherdauer</h2>
+        <p>Buchungsdaten werden für die Dauer der Geschäftsbeziehung aufbewahrt. Nach gesetzlicher Aufbewahrungsfrist (6 bzw. 10 Jahre) werden sie gelöscht. Fotogalerie-Links bleiben aktiv, solange Sie uns nicht zur Löschung auffordern.</p>
+    </section>
+    <section>
+        <h2>8. Sicherheit</h2>
+        <ul>
+            <li>HTTPS-Verschlüsselung</li>
+            <li>Zugriffsschutz über Passwörter und Sitzungs-Timeout</li>
+            <li>Protokollierung kritischer Aktionen</li>
+            <li>Validierung von Dateiuploads</li>
+        </ul>
+    </section>
+    <section>
+        <h2>9. Kontakt Datenschutz</h2>
+        <p>Marie Schneider · Datenschutzbeauftragte<br />
+            E-Mail: <a href="mailto:privacy@studio-lumiere.de">privacy@studio-lumiere.de</a><br />
+            Telefon: +49 30 12345678</p>
+    </section>
+</main>
+<footer>
+    Letzte Aktualisierung: <?= date('d.m.Y') ?> · Studio Lumière Berlin
+</footer>
+</body>
+</html>
