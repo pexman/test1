@@ -1,6 +1,6 @@
 # Europe population video (Remotion)
 
-Animated 9:16 (1080×1920, 30 fps, ~25 s) version of `mapa-europa.html`: countries are counted from the smallest to the largest population, then the full ranking appears.
+Animated 9:16 (1080×1920, 30 fps, 60 s) version of `mapa-europa.html`: countries are counted from the smallest to the largest population, then the full ranking appears.
 
 ```sh
 npm install

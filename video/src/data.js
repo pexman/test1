@@ -17,7 +17,7 @@ export const COUNTRIES = {
 export const ALIAS = { "Åland": "Finland" };
 
 // population classes (millions) → fill colour
-export const CLASSES = [[1, "#fbe3c2"], [5, "#f4b778"], [10, "#e3863f"], [40, "#c0541e"], [Infinity, "#84300f"]];
+export const CLASSES = [[1, "#5eead4"], [5, "#38bdf8"], [10, "#818cf8"], [40, "#c084fc"], [Infinity, "#f472b6"]];
 export const classColor = (m) => CLASSES.find(([t]) => m < t)[1];
 
 const nf = (d) => new Intl.NumberFormat("en-GB", { maximumFractionDigits: d, minimumFractionDigits: d });
