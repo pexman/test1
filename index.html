@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sanitarios AR</title>
+  <meta name="description" content="Convierte fotos de sanitarios en modelos 3D y colócalos en tu baño con realidad aumentada.">
+  <meta name="theme-color" content="#0b5cad">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>Sanitarios <span>AR</span></h1>
+    <button id="btn-add" class="btn primary">+ Añadir sanitario</button>
+  </header>
+
+  <main class="layout">
+    <aside class="catalog">
+      <h2>Catálogo</h2>
+      <div id="catalog-list" class="catalog-list"></div>
+      <p id="catalog-empty" class="hint" hidden>
+        Aún no hay sanitarios. Pulsa <b>+ Añadir sanitario</b> y sube una foto.
+      </p>
+    </aside>
+
+    <section class="stage">
+      <div id="viewer" class="viewer">
+        <div id="viewer-empty" class="viewer-empty">Selecciona o añade un sanitario</div>
+      </div>
+      <div class="stage-info">
+        <div>
+          <strong id="sel-name">—</strong>
+          <span id="sel-dims" class="muted"></span>
+        </div>
+        <div class="stage-actions">
+          <button id="btn-ar" class="btn primary" disabled>Ver en mi baño (AR)</button>
+          <label class="btn">
+            Foto de mi baño
+            <input id="photo-input" type="file" accept="image/*" hidden>
+          </label>
+          <button id="btn-photo-clear" class="btn" hidden>Quitar foto</button>
+          <button id="btn-capture" class="btn" disabled>Captura</button>
+          <button id="btn-edit" class="btn" disabled>Editar</button>
+          <button id="btn-delete" class="btn danger" disabled>Eliminar</button>
+        </div>
+        <p id="ar-hint" class="hint"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Editor de producto -->
+  <dialog id="editor" class="editor">
+    <form method="dialog" id="editor-form">
+      <header>
+        <h2 id="editor-title">Nuevo sanitario</h2>
+        <button value="cancel" class="btn icon" aria-label="Cerrar" formnovalidate>✕</button>
+      </header>
+      <div class="editor-body">
+        <div class="editor-image">
+          <label class="drop" id="drop">
+            <input id="image-input" type="file" accept="image/*" hidden>
+            <span>Toca para elegir una foto del sanitario<br><small>(mejor sobre fondo liso o PNG sin fondo)</small></span>
+          </label>
+          <canvas id="mask-canvas" hidden></canvas>
+          <div id="mask-tools" class="mask-tools" hidden>
+            <label>Tolerancia del fondo <input id="tolerance" type="range" min="5" max="120" value="40"></label>
+            <div class="brush-row">
+              <span>Pincel:</span>
+              <label><input type="radio" name="brush" value="0" checked> Ninguno</label>
+              <label><input type="radio" name="brush" value="1"> Conservar</label>
+              <label><input type="radio" name="brush" value="2"> Borrar</label>
+              <input id="brush-size" type="range" min="4" max="80" value="24" aria-label="Tamaño del pincel">
+            </div>
+            <small class="muted">Lo gris es fondo y se elimina. Usa el pincel para corregir zonas.</small>
+          </div>
+        </div>
+        <div class="editor-fields">
+          <label>Nombre <input id="f-name" required placeholder="Inodoro Roca Gap"></label>
+          <label>Tipo
+            <select id="f-type"></select>
+          </label>
+          <fieldset class="dims">
+            <legend>Medidas reales (cm)</legend>
+            <label>Ancho <input id="f-width" type="number" min="1" step="0.5"></label>
+            <label>Alto <input id="f-height" type="number" min="1" step="0.5"></label>
+            <label>Fondo <input id="f-depth" type="number" min="1" step="0.5"></label>
+          </fieldset>
+          <label>Altura desde el suelo (cm)
+            <input id="f-elevation" type="number" min="0" step="1" value="0">
+            <small class="muted">0 para piezas de suelo; p. ej. 85 para un lavabo suspendido.</small>
+          </label>
+          <label>Relieve 3D <input id="f-relief" type="range" min="0" max="1" step="0.05" value="0.6"></label>
+          <label>Modelo 3D opcional (.glb)
+            <input id="f-glb" type="file" accept=".glb,model/gltf-binary">
+            <small class="muted">Si el fabricante ofrece un GLB, se usa en lugar del volumen generado.</small>
+          </label>
+          <div class="editor-preview" id="editor-preview"></div>
+        </div>
+      </div>
+      <footer>
+        <span id="editor-error" class="error"></span>
+        <button value="cancel" class="btn" formnovalidate>Cancelar</button>
+        <button id="btn-save" value="save" class="btn primary">Guardar</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- Interfaz durante la sesión WebXR -->
+  <div id="ar-overlay" class="ar-overlay" hidden>
+    <div class="ar-top" data-ui>
+      <span id="ar-status">Iniciando AR…</span>
+      <button id="ar-exit" class="btn icon" aria-label="Salir">✕</button>
+    </div>
+    <div class="ar-bottom" data-ui>
+      <div id="ar-selection" class="ar-selection" hidden>
+        <span id="ar-sel-label"></span>
+        <div class="ar-controls">
+          <button data-act="rot-l" class="btn icon" aria-label="Girar a la izquierda">⟲</button>
+          <button data-act="rot-r" class="btn icon" aria-label="Girar a la derecha">⟳</button>
+          <button data-act="up" class="btn icon" aria-label="Subir">▲</button>
+          <button data-act="down" class="btn icon" aria-label="Bajar">▼</button>
+          <button data-act="del" class="btn icon danger" aria-label="Eliminar">🗑</button>
+        </div>
+      </div>
+      <div id="ar-products" class="ar-products"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

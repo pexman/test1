@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="370" height="780" viewBox="0 0 370 780">
+  <!-- Ilustración de ejemplo: sustitúyela por tus fotos de producto -->
+  <defs>
+    <linearGradient id="ceramic" x1="0" x2="1">
+      <stop offset="0" stop-color="#cfd5dc"/>
+      <stop offset=".35" stop-color="#ffffff"/>
+      <stop offset=".7" stop-color="#f1f3f6"/>
+      <stop offset="1" stop-color="#bfc6ce"/>
+    </linearGradient>
+  </defs>
+  <rect x="20" y="10" width="330" height="330" rx="26" fill="url(#ceramic)" stroke="#aab2bc" stroke-width="3"/>
+  <rect x="150" y="30" width="70" height="18" rx="9" fill="#9aa4ae"/>
+  <path d="M10 360 Q185 330 360 360 L350 420 Q185 450 20 420 Z" fill="url(#ceramic)" stroke="#aab2bc" stroke-width="3"/>
+  <path d="M30 430 Q185 460 340 430 Q330 560 250 610 L250 770 L120 770 L120 610 Q40 560 30 430 Z"
+        fill="url(#ceramic)" stroke="#aab2bc" stroke-width="3"/>
+</svg>
