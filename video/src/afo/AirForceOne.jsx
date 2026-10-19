@@ -1,4 +1,4 @@
-import { AbsoluteFill, Sequence, interpolate, spring, useCurrentFrame, useVideoConfig, Easing, staticFile } from "remotion";
+import { AbsoluteFill, Audio, Sequence, interpolate, spring, useCurrentFrame, useVideoConfig, Easing, staticFile } from "remotion";
 import { loadFont } from "@remotion/fonts";
 import { PlaneSide, PlaneTop, Tanker, TOP_TANKS } from "./Planes";
 import { Globe, arcPath, ringPath } from "./Globe";
@@ -10,22 +10,11 @@ const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" };
 const ease = { ...clamp, easing: Easing.inOut(Easing.cubic) };
 
 // ── script: each scene has its narration (shown as captions) and an optional on-screen figure ──
-const SCRIPT = [
-  { id: "hook", text: ["Este es el avión más protegido del planeta."] },
-  { id: "name", text: ["Air Force One no es un avión concreto:", "es el indicativo de cualquier avión de la Fuerza Aérea que lleve al presidente de Estados Unidos."] },
-  { id: "pair", stat: ["1990", "en servicio desde"], text: ["Hoy son dos Boeing 747 modificados, los VC-25A,", "con matrículas 28000 y 29000,", "y vuelan desde 1990."] },
-  { id: "size", stat: ["70,7 m", "de largo · 59,6 m de envergadura"], text: ["Mide 70,7 metros de largo", "y 59,6 metros de punta a punta de las alas."] },
-  { id: "range", stat: ["12.550 km", "sin repostar (7.800 mi)"], text: ["Puede volar unos 12.550 kilómetros sin repostar:", "de Washington a Tokio de un tirón."] },
-  { id: "refuel", stat: ["≈ 3.400 L/min", "de combustible en pleno vuelo"], text: ["Y además puede repostar en el aire,", "así que su autonomía es prácticamente ilimitada."] },
-  { id: "fuel", stat: ["160 t", "de combustible a bordo"], text: ["Sus tanques cargan más de 160 toneladas de combustible."] },
-  { id: "emp", stat: ["50.000 V/m", "pico del pulso, en nanosegundos"], text: ["Su secreto mejor guardado:", "está blindado contra el pulso electromagnético de una explosión nuclear."] },
-  { id: "hawaii", stat: ["≈ 1.400 km", "de la explosión a Honolulu"], text: ["En 1962, una prueba nuclear sobre el Pacífico", "apagó farolas en Hawái, a unos 1.400 kilómetros."] },
-  { id: "cable", text: ["Por eso su cableado va envuelto en una malla metálica", "que desvía esa energía antes de que llegue a los equipos."] },
-  { id: "inside", stat: ["370 m²", "repartidos en tres niveles"], text: ["Dentro hay 370 metros cuadrados en tres niveles:", "suite presidencial, despacho, sala de reuniones…", "y hasta un quirófano, con un médico siempre a bordo."] },
-  { id: "outro", text: ["Por algo lo llaman la Casa Blanca volante."] },
-];
+import SCRIPT from "./script.json";
+// voice.json maps "scene/sentence" → seconds of narration (written by scripts/voice.mjs); empty means captions-only timing
+import VOICE from "./voice.json";
 
-const WORD = 9, HOLD = 16, PAD = 14, FADE = 12;
+const WORD = 9, HOLD = 16, PAD = 14, FADE = 12, GAP = 8;
 const chunk = (sentence) => {
   const w = sentence.split(" "), out = [];
   for (let i = 0; i < w.length; i += 6) out.push(w.slice(i, i + 6));
@@ -33,14 +22,41 @@ const chunk = (sentence) => {
   if (out.length > 1 && out[out.length - 1].length < 3) { const last = out.pop(); out[out.length - 1].push(...last); }
   return out;
 };
+const weight = (w) => w.length + 2;
+const sumWeight = (words) => words.reduce((a, w) => a + weight(w), 0);
 const SCENES = [];
 {
   let t = 0;
   for (const s of SCRIPT) {
     let local = PAD;
-    const caps = s.text.flatMap(chunk).map((words) => { const c = { words, start: local, len: words.length * WORD + HOLD }; local += c.len; return c; });
+    const caps = [], voice = [];
+    s.text.forEach((sentence, si) => {
+      const secs = VOICE[`${s.id}/${si}`];
+      const chunks = chunk(sentence);
+      if (secs) {
+        // spread the sentence's audio over its chunks and words by length
+        const total = Math.ceil(secs * FPS), all = sumWeight(chunks.flat());
+        voice.push({ file: `voice/${s.id}-${si}.mp3`, start: local });
+        let at = local;
+        for (const words of chunks) {
+          const len = Math.round((total * sumWeight(words)) / all);
+          let acc = 0;
+          const times = words.map((w) => { const x = Math.round((len * acc) / sumWeight(words)); acc += weight(w); return x; });
+          caps.push({ words, start: at, len, times });
+          at += len;
+        }
+        caps[caps.length - 1].len += GAP;
+        local = at + GAP;
+      } else {
+        for (const words of chunks) {
+          const c = { words, start: local, len: words.length * WORD + HOLD, times: words.map((_, i) => i * WORD) };
+          caps.push(c);
+          local += c.len;
+        }
+      }
+    });
     const dur = local + PAD;
-    SCENES.push({ ...s, caps, start: t, dur });
+    SCENES.push({ ...s, caps, voice, start: t, dur });
     t += dur;
   }
 }
@@ -67,6 +83,7 @@ const SceneShell = ({ s }) => {
       <V f={f} dur={s.dur} fps={fps} s={s} />
       {s.stat && <Stat stat={s.stat} f={f} fps={fps} />}
       <Captions caps={s.caps} f={f} fps={fps} />
+      {s.voice.map((v) => <Sequence key={v.file} from={v.start} layout="none"><Audio src={staticFile(v.file)} /></Sequence>)}
     </AbsoluteFill>
   );
 };
@@ -87,11 +104,11 @@ const Captions = ({ caps, f, fps }) => {
   const c = caps.find((c) => f >= c.start && f < c.start + c.len);
   if (!c) return null;
   const lf = f - c.start;
-  const shown = Math.min(c.words.length, Math.floor(lf / WORD) + 1);
+  const shown = Math.max(1, c.times.filter((x) => lf >= x).length);
   return (
     <div style={{ position: "absolute", left: 70, right: 70, top: 1430, textAlign: "center", fontSize: 66, fontWeight: 800, lineHeight: 1.2, color: "#fff", textShadow: shadow }}>
       {c.words.slice(0, shown).map((w, i) => {
-        const k = spring({ frame: lf - i * WORD, fps, config: { damping: 12, stiffness: 220 } });
+        const k = spring({ frame: lf - c.times[i], fps, config: { damping: 12, stiffness: 220 } });
         return (
           <span key={i} style={{ display: "inline-block", marginRight: 18, color: i === shown - 1 ? "#ffd400" : "#fff", transform: `scale(${0.6 + 0.4 * k})` }}>{w}</span>
         );

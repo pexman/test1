@@ -1,0 +1,117 @@
+[
+ {
+  "id": "hook",
+  "text": [
+   "Este es el avión más protegido del planeta."
+  ]
+ },
+ {
+  "id": "name",
+  "text": [
+   "Air Force One no es un avión concreto:",
+   "es el indicativo de cualquier avión de la Fuerza Aérea que lleve al presidente de Estados Unidos."
+  ]
+ },
+ {
+  "id": "pair",
+  "stat": [
+   "1990",
+   "en servicio desde"
+  ],
+  "text": [
+   "Hoy son dos Boeing 747 modificados, los VC-25A,",
+   "con matrículas 28000 y 29000,",
+   "y vuelan desde 1990."
+  ]
+ },
+ {
+  "id": "size",
+  "stat": [
+   "70,7 m",
+   "de largo · 59,6 m de envergadura"
+  ],
+  "text": [
+   "Mide 70,7 metros de largo",
+   "y 59,6 metros de punta a punta de las alas."
+  ]
+ },
+ {
+  "id": "range",
+  "stat": [
+   "12.550 km",
+   "sin repostar (7.800 mi)"
+  ],
+  "text": [
+   "Puede volar unos 12.550 kilómetros sin repostar:",
+   "de Washington a Tokio de un tirón."
+  ]
+ },
+ {
+  "id": "refuel",
+  "stat": [
+   "≈ 3.400 L/min",
+   "de combustible en pleno vuelo"
+  ],
+  "text": [
+   "Y además puede repostar en el aire,",
+   "así que su autonomía es prácticamente ilimitada."
+  ]
+ },
+ {
+  "id": "fuel",
+  "stat": [
+   "160 t",
+   "de combustible a bordo"
+  ],
+  "text": [
+   "Sus tanques cargan más de 160 toneladas de combustible."
+  ]
+ },
+ {
+  "id": "emp",
+  "stat": [
+   "50.000 V/m",
+   "pico del pulso, en nanosegundos"
+  ],
+  "text": [
+   "Su secreto mejor guardado:",
+   "está blindado contra el pulso electromagnético de una explosión nuclear."
+  ]
+ },
+ {
+  "id": "hawaii",
+  "stat": [
+   "≈ 1.400 km",
+   "de la explosión a Honolulu"
+  ],
+  "text": [
+   "En 1962, una prueba nuclear sobre el Pacífico",
+   "apagó farolas en Hawái, a unos 1.400 kilómetros."
+  ]
+ },
+ {
+  "id": "cable",
+  "text": [
+   "Por eso su cableado va envuelto en una malla metálica",
+   "que desvía esa energía antes de que llegue a los equipos."
+  ]
+ },
+ {
+  "id": "inside",
+  "stat": [
+   "370 m²",
+   "repartidos en tres niveles"
+  ],
+  "text": [
+   "Dentro hay 370 metros cuadrados en tres niveles:",
+   "suite presidencial, despacho, sala de reuniones…",
+   "y hasta un quirófano, con un médico siempre a bordo."
+  ]
+ },
+ {
+  "id": "outro",
+  "text": [
+   "Por algo lo llaman la Casa Blanca volante."
+  ]
+ }
+]
